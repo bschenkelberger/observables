@@ -1,6 +1,28 @@
 # Observables
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.0.
+Ein Observable ist eine Technik zur gemeinsamen Nutzung von Daten. Ein Observable liefert einen Strom von Werten zurückgeben. Observables sind kein Angular-spezifisches Feature, sondern ein neuer Standard für die Verwaltung asynchroner Daten (der in der ES7-Version enthalten ist.)
+
+Observables verwenden das Publish-and-Subscribe-Modell. Es wandelt einen Datenstrom in einen beobachtbaren Datenstrom um. Anschließend können sie diese Daten sowie Signale ausgeben, um Fehler oder die Fertigstellung des Datenstroms anzuzeigen.
+
+Ein Observable allein ist nicht sehr nützlich, denn die Daten, die das Observable ausgibt, müssen von etwas anderem genutzt werden. Diese werden Beobachter genannt.
+
+Eine Observable-Methode (Publisher) wird erst dann ausgeführt und gibt Daten aus, wenn ein Beobachter (Subscriber) sie abonniert hat. Die Kommunikation zwischen dem Observable und dem Observer erfolgt über drei Callbacks.
+
+next()
+error()
+complete()
+
+```
+object_name = new Observable((observer) => {
+  // Logic
+})
+```
+
+```
+object_name = new Observable((observer) => {
+  observer.next();
+})
+```
 
 ## Development server
 

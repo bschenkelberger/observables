@@ -8,31 +8,24 @@ import { Observable } from 'rxjs';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy{
+export class AppComponent implements OnInit {
   title = 'Observables';
 
-  /*
-  * Definition eines OS via Konstruktor. Als Callback definieren wir einen
-  * observer der 5 Werte zurück liefern kann.
-  */
+  /* 1. Beispiel */
   myObservable$ = new Observable((observer) => {
-    console.log('Starting observable');
-
     observer.next('1');
     observer.next('2');
     observer.next('3');
-    observer.next('4');
-    observer.next('5');
+    observer.error('Oops, something went wrong there');
+    observer.complete();
   });
 
   ngOnInit(): void {
-    this.myObservable$.subscribe(res => {
-      console.log('Result:', res);
+    this.myObservable$.subscribe(
+      res => { console.log('Elemente des Datenstroms:', res); }, //next callback
+      (error) => { console.log('Fehlermeldung:', error); }, //error callback
+      () => { console.log('Datenstrom wurde abgearbeitet'); //complete callback
     });
-  }
-
-  ngOnDestroy(): void {
-    //this.myObservable$.u
   }
 
 }

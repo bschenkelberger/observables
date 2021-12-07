@@ -1,7 +1,20 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h1>
     Welcome to {{ title }}!
   </h1>
+  <h2>Observable subscribe: 
+    <input id="_subscribeCheckbox" type="checkbox" [formControl]="_subscribeCheckbox">
+  </h2>
+  <p>
+    Mit Fehler:<input id="_subscribeCheckboxError" type="checkbox" [formControl]="_subscribeCheckboxError">
+  </p>
+
+  <div *ngIf="_subscribeCheckbox.value === true">
+    Übersicht der gelieferten Informationen:
+    <div *ngFor="let item of _observableInfo">
+      <p>{{ item }}</p>
+    </div>
+</div>
+
 </div>
 

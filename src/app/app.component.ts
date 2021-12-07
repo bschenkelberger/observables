@@ -1,31 +1,80 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 //RxJS comes bundled with Angular when we install it, but we still have to include it in the component where
 // we want to use it.
-import { Observable } from 'rxjs';
+import { from, Observable, of, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy{
+
   title = 'Observables';
 
+  _subscribeCheckbox =  new FormControl('');
+  _subscribeCheckboxError =  new FormControl('');
+  _observableInfo : any[] = [];
+  checked : boolean = false;
+  subscription: Subscription;
+  
   /* 1. Beispiel */
   myObservable$ = new Observable((observer) => {
-    observer.next('1');
+/*     observer.next('1');
     observer.next('2');
+    //observer.error('Oops, something went wrong there');
     observer.next('3');
-    observer.error('Oops, something went wrong there');
     observer.complete();
+ */
+    setTimeout(()=> observer.next('1'), 1000);
+    setTimeout(()=> observer.next('2'), 2000);
+    if(this._subscribeCheckboxError.value) {
+      setTimeout(()=> observer.error('Oops, something went wrong there'), 3000);
+    }
+    setTimeout(()=> observer.next('3'), 4000);
+    setTimeout(()=> observer.complete(), 5000);
+
   });
 
   ngOnInit(): void {
-    this.myObservable$.subscribe(
-      res => { console.log('Elemente des Datenstroms:', res); }, //next callback
-      (error) => { console.log('Fehlermeldung:', error); }, //error callback
-      () => { console.log('Datenstrom wurde abgearbeitet'); //complete callback
+    this._subscribeCheckbox.valueChanges.subscribe(() => {
+      this.checked = !this.checked;
+      this.onSubscribe(this.checked);
     });
+
+    /* [Bsp. obsOf1]*/
+    const source1 = of(1, 2, 3, 4, 5);
+    const obsOf1 = source1.subscribe(val => console.log(val));
+    
+    /* [Bsp. obsOf2]*/
+    const source2 = of({ name: 'Angular' }, [1, 2, 3], 4, 5 ,6);
+    const obsOf2 = source2.subscribe(val => console.log(val));
+
+    /* [Bsp. obsFrom]
+    //const obsFrom = from(new Promise(resolve => resolve('Hello World!')));
+    //const obsFrom = from([1, 2, 3, 4, 5]);
+    const obsFrom = from('Hello World');
+    const subscribe = obsFrom.subscribe(val => console.log(val));
+    */
   }
 
+  onSubscribe(value: any) {
+    if (value){
+      console.log('subscribe the Observable');
+      this.subscription = this.myObservable$.subscribe(
+        (res) => { this._observableInfo.push('Elemente des Datenstroms:' + res) }, //next callback
+        (error) => { this._observableInfo.push('Fehlermeldung:' + error) }, //error callback
+        () => { this._observableInfo.push('Datenstrom wurde abgearbeitet!') //complete callback
+      });
+    } else {
+      console.log('unsubscribe the Observable');
+      this._observableInfo = [];
+      this.subscription.unsubscribe();
+    }
+  };
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

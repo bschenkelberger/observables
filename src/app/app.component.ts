@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 //RxJS comes bundled with Angular when we install it, but we still have to include it in the component where
 // we want to use it.
 import { from, Observable, of, Subscription } from 'rxjs';
+import { map, filter, tap } from 'rxjs/operators'
 
 @Component({
   selector: 'app-root',
@@ -43,20 +44,47 @@ export class AppComponent implements OnInit, OnDestroy{
       this.onSubscribe(this.checked);
     });
 
-    /* [Bsp. obsOf1]*/
-    const source1 = of(1, 2, 3, 4, 5);
-    const obsOf1 = source1.subscribe(val => console.log(val));
-    
-    /* [Bsp. obsOf2]*/
-    const source2 = of({ name: 'Angular' }, [1, 2, 3], 4, 5 ,6);
-    const obsOf2 = source2.subscribe(val => console.log(val));
-
-    /* [Bsp. obsFrom]
-    //const obsFrom = from(new Promise(resolve => resolve('Hello World!')));
-    //const obsFrom = from([1, 2, 3, 4, 5]);
-    const obsFrom = from('Hello World');
-    const subscribe = obsFrom.subscribe(val => console.log(val));
-    */
+  /* [Bsp. obsOf1]
+   const source1 = of(1, 2, 3, 4, 5);
+   const obsOf1 = source1.subscribe(val => console.log(val));
+  */
+  /* [Bsp. obsOf2]
+   const source2 = of({ name: 'Angular' }, [1, 2, 3], 4, 5 ,6);
+   const obsOf2 = source2.subscribe(val => console.log(val));
+  */
+  /* [Bsp. obsFrom]
+   //const obsFrom = from(new Promise(resolve => resolve('Hello World!')));
+   //const obsFrom = from([1, 2, 3, 4, 5]);
+   const obsFrom = from('Hello World');
+   const subscribe = obsFrom.subscribe(val => console.log(val));
+  */
+  /* [Bsp. obsPipe]
+   const source1 = of(1, 2, 3, 4, 5).pipe();
+   const obsPipe = source1.subscribe(val => console.log(val));
+  */
+  /* [Bsp. obsPipeTap]
+   const source1 = of(1, 2, 3, 4, 5)
+    .pipe(
+      tap(el => console.log('Tap - output:' + el))
+    );
+   const obsPipe = source1.subscribe(val => console.log(val));
+  */
+  /* [Bsp. obsPipeTapFilter]
+   const source1 = of(1, 2, 3, 4, 5)
+    .pipe(
+      tap(el => console.log('Tap - output:' + el)),
+      filter(el => el > 2)
+    );
+   const obsPipeFilter = source1.subscribe(val => console.log(val));
+   */
+   /* [Bsp. obsPipeTapFilterMap] */
+   const source1 = of(1, 2, 3, 4, 5)
+    .pipe(
+      tap(el => console.log('Tap - output:' + el)),
+      filter(el => el > 2),
+      map(el => el * 2));
+   const obsPipeTapFilterMap = source1.subscribe(val => console.log(val));
+   
   }
 
   onSubscribe(value: any) {

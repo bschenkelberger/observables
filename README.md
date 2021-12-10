@@ -1,9 +1,11 @@
 # RxJS (Reactive Extensions Library for JavaScript)
 Das Projekt wird von Microsoft in Zusammenarbeit mit einer Community von Open-Source-Entwicklern aktiv weiterentwickelt.
 
-`...is a set of libraries to compose asynchronous and event-based programs using observable collections and Array#extras style composition in JavaScript`
+`...is a set of libraries to compose asynchronous and event-based programs using observable collections and Array style composition in JavaScript`
 
-[RxJS](https://github.com/Reactive-Extensions/RxJS)
+[RxJS - GitHub](https://github.com/Reactive-Extensions/RxJS)
+
+Es geht darum, Datenströme zu erzeugen, Werte, Fehler oder vollständige Signale auszusenden, zu manipulieren, zu übertragen oder etwas nützliches mit den Datenströmen zu tun.
 
 Die `RxJS` extension hat zwei Hauptakteure:
 
@@ -11,18 +13,12 @@ Die `RxJS` extension hat zwei Hauptakteure:
 2. Observers ( Subscribers)
 
 - Ein `Observable` ist eine Funktion, die eine Datenmenge in einen beobachtbaren Datenstrom umwandelt. Die Wert werden asynchron ausgeliefert.
-- Das Observable allein ist nutzlos, es sei denn, jemand konsumiert den vom Observablen ausgegebenen Wert. Wir nennen sie `Observers`.
-
-
-# Observables
+- Das Observable allein ist nutzlos, es sei denn, jemand konsumiert die ausgegebenen Werte. Das ist der `Observers`.
 
 Observables sind kein Angular-spezifisches Feature, sondern ein Standard für die Verwaltung und das Handling mit asynchroner Daten (der in der ES7(ECMAScript 2016)-Version festgelegt wurde)
-Observables selbst sind ein integraler Bestandteil des `Reactive Programming`
 
-## Reactive Programming
-Es geht darum, Datenströme zu erzeugen, Werte, Fehler oder vollständige Signale auszusenden, zu manipulieren, zu übertragen oder etwas nützliches mit den Datenströmen zu tun.
 
-  `Reactive Programming` ein fester Bestandteil von Angular. Angular brint als Abhängigkeit das Module `RxJS` mit.
+## Angular brint als Abhängigkeit das Module `RxJS` mit.
 
   ```javascript
   "dependencies": {
@@ -91,6 +87,7 @@ Die zwei bekanntesten sollten `of` und `from` sein.
   const obsOf2 = source2.subscribe(val => console.log(val));
   ```
   Siehe `[Bsp. obsOf2]` in appComponent.ts
+
 2. `from` [RxJS - from](https://rxjs.dev/api/index/function/from)
 - Dieser Operator kann verwendet werden, um ein Promise in ein Observable umzuwandeln!
 - Bei Arrays und Iterables werden alle enthaltenen Werte als Sequenz ausgegeben!
@@ -117,7 +114,7 @@ Die zwei bekanntesten sollten `of` und `from` sein.
   
   Pipe wird verwendet wenn auf dem Datenstrom weitere aktionen wie filter, map, usw ausgeführt werden sollen
   ```typescript
-  const source1 = of(1, 2, 3, 4, 5).pipe(....);
+  const source1 = of(1, 2, 3, 4, 5).pipe(op1, op2, ....);
   const obsPipe1 = source1.subscribe(val => console.log(val));
   ```
 Siehe `[Bsp. obsPipe]` in appComponent.ts
@@ -168,12 +165,20 @@ Siehe `[Bsp. obsPipeTapFilter]` in appComponent.ts
 Siehe `[Bsp. obsPipeTapFilterMap]` in appComponent.ts
 
 ## Links
-### https://angular.io/
+### Angular
 - [observables overview](https://angular.io/guide/observables).
 - [The RxJS library](https://angular.io/guide/rx-library#the-rxjs-library).
 - [Observables in Angular](https://angular.io/guide/observables-in-angular).
-### https://rxjs.de
+### RxJS
 - [Overview](https://rxjs.dev/guide/overview)
+- [RxJS - GitHub](https://github.com/Reactive-Extensions/RxJS)
+- [RxJS - of](https://rxjs.dev/api/index/function/of)
+- [RxJS - from](https://rxjs.dev/api/index/function/from)
+- [RxJS - pipe](https://rxjs.dev/api/index/function/pipe)
+- [RxJS - tap](https://rxjs.dev/api/operators/tap)
+- [RxJS - filter](https://rxjs.dev/api/operators/filter)
+- [RxJS - map](https://rxjs.dev/api/operators/map)
+
 
 
 

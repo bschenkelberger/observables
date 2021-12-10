@@ -77,21 +77,21 @@ export class AppComponent implements OnInit, OnDestroy{
     );
    const obsPipeFilter = source1.subscribe(val => console.log(val));
    */
-   /* [Bsp. obsPipeTapFilterMap] */
+   /* [Bsp. obsPipeTapFilterMap] 
    const source1 = of(1, 2, 3, 4, 5)
     .pipe(
       tap(el => console.log('Tap - output:' + el)),
       filter(el => el > 2),
       map(el => el * 2));
    const obsPipeTapFilterMap = source1.subscribe(val => console.log(val));
-   
+   */
   }
 
   onSubscribe(value: any) {
     if (value){
       console.log('subscribe the Observable');
       this.subscription = this.myObservable$.subscribe(
-        (res) => { this._observableInfo.push('Elemente des Datenstroms:' + res) }, //next callback
+        (next) => { this._observableInfo.push('Elemente des Datenstroms:' + next) }, //next callback
         (error) => { this._observableInfo.push('Fehlermeldung:' + error) }, //error callback
         () => { this._observableInfo.push('Datenstrom wurde abgearbeitet!') //complete callback
       });

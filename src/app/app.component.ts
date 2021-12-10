@@ -22,12 +22,14 @@ export class AppComponent implements OnInit, OnDestroy{
   
   /* 1. Beispiel */
   myObservable$ = new Observable((observer) => {
-/*     observer.next('1');
+/*
+    observer.next('1');
     observer.next('2');
     //observer.error('Oops, something went wrong there');
     observer.next('3');
     observer.complete();
- */
+*/
+
     setTimeout(()=> observer.next('1'), 1000);
     setTimeout(()=> observer.next('2'), 2000);
     if(this._subscribeCheckboxError.value) {
@@ -47,8 +49,8 @@ export class AppComponent implements OnInit, OnDestroy{
   /* [Bsp. obsOf1]
    const source1 = of(1, 2, 3, 4, 5);
    const obsOf1 = source1.subscribe(val => console.log(val));
-  */
-  /* [Bsp. obsOf2]
+   */
+  /* [Bsp. obsOf2] 
    const source2 = of({ name: 'Angular' }, [1, 2, 3], 4, 5 ,6);
    const obsOf2 = source2.subscribe(val => console.log(val));
   */
@@ -77,7 +79,7 @@ export class AppComponent implements OnInit, OnDestroy{
     );
    const obsPipeFilter = source1.subscribe(val => console.log(val));
    */
-   /* [Bsp. obsPipeTapFilterMap] 
+   /* [Bsp. obsPipeTapFilterMap]
    const source1 = of(1, 2, 3, 4, 5)
     .pipe(
       tap(el => console.log('Tap - output:' + el)),
@@ -90,10 +92,10 @@ export class AppComponent implements OnInit, OnDestroy{
   onSubscribe(value: any) {
     if (value){
       console.log('subscribe the Observable');
-      this.subscription = this.myObservable$.subscribe(
-        (next) => { this._observableInfo.push('Elemente des Datenstroms:' + next) }, //next callback
-        (error) => { this._observableInfo.push('Fehlermeldung:' + error) }, //error callback
-        () => { this._observableInfo.push('Datenstrom wurde abgearbeitet!') //complete callback
+      this.subscription = this.myObservable$.subscribe({
+        next: (next) => this._observableInfo.push('Elemente des Datenstroms:' + next), //next callback
+        error: (error) => this._observableInfo.push('Fehlermeldung:' + error), //error callback
+        complete: () => this._observableInfo.push('Datenstrom wurde abgearbeitet!') //complete callback
       });
     } else {
       console.log('unsubscribe the Observable');

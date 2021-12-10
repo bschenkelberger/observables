@@ -57,11 +57,11 @@ Namenskonvention, Obersavales sollen mit einem endenen `$` gekennzeichnet werden
 
 Erste wenn es einen `subscriber` gibt werden die Daten geliefert
 ```typescript
-  myObservable.subscribt()
+  myObservable.subscribe()
 ```
 Es ist möglich durch Aufruf der `unsubscribt` Funktion, den Datenstrom abzubestellen
 ```typescript
-  myObservable.unsubscribt()
+  subscription.unsubscribe()
 ```
 *Schauen wir uns das Beispiel am offenen Herzen an. Starte die Anwendunf `ng serve --open`*
 
